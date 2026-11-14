@@ -1,0 +1,472 @@
+{
+  "name": "zovo-rest-client",
+  "displayName": "REST Client & HTTP Client",
+  "description": "REST client and HTTP client with no login and no account: send requests from .http and .rest files, environments, chained requests, a JSON response viewer, cURL paste and copy, and history. Offline, no telemetry.",
+  "version": "0.1.0",
+  "publisher": "zovo",
+  "license": "MIT",
+  "icon": "icon.png",
+  "galleryBanner": {
+    "color": "#1B2A4A",
+    "theme": "dark"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theluckystrike/rest-client-vscode"
+  },
+  "bugs": {
+    "url": "https://github.com/theluckystrike/rest-client-vscode/issues"
+  },
+  "homepage": "https://github.com/theluckystrike/rest-client-vscode#readme",
+  "engines": {
+    "vscode": "^1.82.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Testing",
+    "Other"
+  ],
+  "keywords": [
+    "rest client",
+    "http client",
+    "api client",
+    "http file",
+    "api testing"
+  ],
+  "main": "./src/extension.js",
+  "activationEvents": [
+    "onLanguage:http"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    },
+    "virtualWorkspaces": false
+  },
+  "contributes": {
+    "languages": [
+      {
+        "id": "http",
+        "aliases": [
+          "HTTP",
+          "http"
+        ],
+        "extensions": [
+          ".http",
+          ".rest"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "http",
+        "scopeName": "source.http.zovo",
+        "path": "./syntaxes/http.tmLanguage.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.json": "json",
+          "meta.embedded.block.xml": "xml"
+        }
+      }
+    ],
+    "commands": [
+      {
+        "command": "zovoRest.send",
+        "title": "Send Request",
+        "category": "REST Client (Zovo)",
+        "icon": "$(play)"
+      },
+      {
+        "command": "zovoRest.rerun",
+        "title": "Send Last Request Again",
+        "category": "REST Client (Zovo)"
+      },
+      {
+        "command": "zovoRest.cancel",
+        "title": "Cancel Request",
+        "category": "REST Client (Zovo)"
+      },
+      {
+        "command": "zovoRest.copyAsCurl",
+        "title": "Copy Request as cURL",
+        "category": "REST Client (Zovo)"
+      },
+      {
+        "command": "zovoRest.pasteCurl",
+        "title": "Paste cURL as Request",
+        "category": "REST Client (Zovo)"
+      },
+      {
+        "command": "zovoRest.switchEnvironment",
+        "title": "Switch Environment",
+        "category": "REST Client (Zovo)"
+      },
+      {
+        "command": "zovoRest.history",
+        "title": "Request History",
+        "category": "REST Client (Zovo)"
+      },
+      {
+        "command": "zovoRest.clearHistory",
+        "title": "Clear Request History",
+        "category": "REST Client (Zovo)"
+      },
+      {
+        "command": "zovoRest.clearCookies",
+        "title": "Clear Cookies",
+        "category": "REST Client (Zovo)"
+      },
+      {
+        "command": "zovoRest.newRequestFile",
+        "title": "New .http File",
+        "category": "REST Client (Zovo)"
+      },
+      {
+        "command": "zovoRest.openSample",
+        "title": "Open Sample Requests",
+        "category": "REST Client (Zovo)"
+      },
+      {
+        "command": "zovoRest.openWalkthrough",
+        "title": "Get Started",
+        "category": "REST Client (Zovo)"
+      },
+      {
+        "command": "zovoRest.importCollection",
+        "title": "Import a Collection or OpenAPI File (Pro)",
+        "category": "REST Client (Zovo)"
+      },
+      {
+        "command": "zovoRest.runAll",
+        "title": "Run All Requests with Assertions (Pro)",
+        "category": "REST Client (Zovo)"
+      },
+      {
+        "command": "zovoRest.generateCode",
+        "title": "Generate Code from Request (Pro)",
+        "category": "REST Client (Zovo)"
+      },
+      {
+        "command": "zovoRest.supportDeveloper",
+        "title": "Support the developer",
+        "category": "REST Client (Zovo)"
+      },
+      {
+        "command": "zovoRest.moreViewers",
+        "title": "More free tools",
+        "category": "REST Client (Zovo)"
+      },
+      {
+        "command": "zovoRest.getPro",
+        "title": "Get Zovo Pro (USD 19 once, all 22 Zovo extensions)",
+        "category": "Zovo Pro"
+      },
+      {
+        "command": "zovoRest.payWithPayPal",
+        "title": "Pay for Zovo Pro with PayPal (USD 19, team of 5 USD 59)",
+        "category": "Zovo Pro"
+      },
+      {
+        "command": "zovoRest.unlockWithSponsors",
+        "title": "I already paid: unlock with GitHub Sponsors",
+        "category": "Zovo Pro"
+      },
+      {
+        "command": "zovoRest.enterLicenseKey",
+        "title": "Enter Zovo Pro license key",
+        "category": "Zovo Pro"
+      },
+      {
+        "command": "zovoRest.removeLicense",
+        "title": "Remove Zovo Pro from this editor",
+        "category": "Zovo Pro"
+      },
+      {
+        "command": "zovoRest.payByCard",
+        "title": "Pay for Zovo Pro by card (USD 19)",
+        "category": "Zovo Pro"
+      },
+      {
+        "command": "zovoRest.zovoPro.import",
+        "title": "Zovo Pro: Import a collection"
+      },
+      {
+        "command": "zovoRest.zovoPro.run",
+        "title": "Zovo Pro: Run all requests with assertions"
+      },
+      {
+        "command": "zovoRest.zovoPro.code",
+        "title": "Zovo Pro: Generate code from a request"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "zovoRest.send",
+        "key": "ctrl+alt+r",
+        "mac": "cmd+alt+r",
+        "when": "editorTextFocus && editorLangId == 'http'"
+      },
+      {
+        "command": "zovoRest.rerun",
+        "key": "ctrl+alt+l",
+        "mac": "cmd+alt+l",
+        "when": "editorTextFocus && editorLangId == 'http'"
+      },
+      {
+        "command": "zovoRest.cancel",
+        "key": "ctrl+alt+k",
+        "mac": "cmd+alt+k",
+        "when": "zovoRest.sending"
+      },
+      {
+        "command": "zovoRest.switchEnvironment",
+        "key": "ctrl+alt+e",
+        "mac": "cmd+alt+e",
+        "when": "editorTextFocus && editorLangId == 'http'"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "zovoRest.send",
+          "when": "editorLangId == 'http'",
+          "group": "navigation@1"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "zovoRest.send",
+          "when": "editorLangId == 'http'",
+          "group": "zovoRest@1"
+        },
+        {
+          "command": "zovoRest.copyAsCurl",
+          "when": "editorLangId == 'http'",
+          "group": "zovoRest@2"
+        },
+        {
+          "command": "zovoRest.pasteCurl",
+          "when": "editorLangId == 'http'",
+          "group": "zovoRest@3"
+        },
+        {
+          "command": "zovoRest.generateCode",
+          "when": "editorLangId == 'http' && config.zovoRest.showProTools",
+          "group": "zovoRest@4"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "zovoRest.zovoPro.import",
+          "when": "!explorerResourceIsFolder && resourceFilename =~ /\\.(json|ya?ml)$/i && config.zovoRest.showProTools",
+          "group": "zovoPro@1"
+        },
+        {
+          "command": "zovoRest.zovoPro.run",
+          "when": "!explorerResourceIsFolder && resourceFilename =~ /\\.(http|rest)$/i && config.zovoRest.showProTools",
+          "group": "zovoPro@1"
+        },
+        {
+          "command": "zovoRest.zovoPro.code",
+          "when": "!explorerResourceIsFolder && resourceFilename =~ /\\.(http|rest)$/i && config.zovoRest.showProTools",
+          "group": "zovoPro@1"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "zovoRest.send",
+          "when": "editorLangId == 'http'"
+        },
+        {
+          "command": "zovoRest.copyAsCurl",
+          "when": "editorLangId == 'http'"
+        },
+        {
+          "command": "zovoRest.cancel",
+          "when": "zovoRest.sending"
+        },
+        {
+          "command": "zovoRest.importCollection",
+          "when": "config.zovoRest.showProTools"
+        },
+        {
+          "command": "zovoRest.runAll",
+          "when": "config.zovoRest.showProTools && isWorkspaceTrusted"
+        },
+        {
+          "command": "zovoRest.generateCode",
+          "when": "config.zovoRest.showProTools"
+        },
+        {
+          "command": "zovoRest.zovoPro.import",
+          "when": "false"
+        },
+        {
+          "command": "zovoRest.zovoPro.run",
+          "when": "false"
+        },
+        {
+          "command": "zovoRest.zovoPro.code",
+          "when": "false"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "REST Client (Zovo)",
+      "properties": {
+        "zovoRest.environmentVariables": {
+          "type": "object",
+          "default": {
+            "$shared": {}
+          },
+          "markdownDescription": "Environments for `{{variables}}`. Each key is an environment name with its variables; `$shared` applies to every environment. Files named `http-client.env.json` next to your .http files (or in a parent folder) are read too and override these.",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "zovoRest.timeoutMs": {
+          "type": "number",
+          "default": 30000,
+          "minimum": 100,
+          "description": "Time limit for one request, in milliseconds. A request can set its own with # @timeout 5000."
+        },
+        "zovoRest.followRedirects": {
+          "type": "boolean",
+          "default": true,
+          "description": "Follow 3xx redirects (up to 10). A request can turn this off with # @no-redirect."
+        },
+        "zovoRest.allowInsecureTls": {
+          "type": "boolean",
+          "default": false,
+          "description": "Accept self-signed and otherwise untrusted TLS certificates. Only for local test servers."
+        },
+        "zovoRest.rememberCookies": {
+          "type": "boolean",
+          "default": true,
+          "description": "Keep cookies set by responses in memory for this window and send them with later requests to the same site. A request can opt out with # @no-cookie-jar."
+        },
+        "zovoRest.rememberHistory": {
+          "type": "boolean",
+          "default": true,
+          "description": "Keep the last 50 requests, as written (variables not filled), in Request History on this computer."
+        },
+        "zovoRest.defaultHeaders": {
+          "type": "object",
+          "default": {},
+          "markdownDescription": "Headers added to every request that does not set them, for example `{ \"Accept\": \"application/json\" }`."
+        },
+        "zovoRest.responsePanel": {
+          "type": "string",
+          "enum": [
+            "reuse",
+            "new"
+          ],
+          "enumDescriptions": [
+            "One response tab, reused for each request",
+            "A new response tab for each request"
+          ],
+          "default": "reuse",
+          "description": "Where responses open."
+        },
+        "zovoRest.previewColumn": {
+          "type": "string",
+          "enum": [
+            "beside",
+            "current"
+          ],
+          "default": "beside",
+          "description": "Open the response beside the .http file or in the same editor group."
+        },
+        "zovoRest.maxBodyMB": {
+          "type": "number",
+          "default": 50,
+          "minimum": 1,
+          "description": "Largest response body to download, in MB. The viewer shows the first 2 MB of text; Open shows all of it."
+        },
+        "zovoRest.showCodeLens": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show Send Request and Copy as cURL above each request."
+        },
+        "zovoRest.maskSecretsOnHover": {
+          "type": "boolean",
+          "default": true,
+          "description": "In the hover over {{token}}, {{password}}, {{secret}} and {{key}} variables, show only the first 4 characters."
+        },
+        "zovoRest.showProTools": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the Zovo Pro tools (import, run with assertions, code generation) in menus and the response viewer. Everything free stays visible."
+        },
+        "zovoRest.askForRating": {
+          "type": "boolean",
+          "default": true,
+          "description": "Ask once for a Marketplace rating after the extension worked for you on 2 occasions 30 minutes apart. Never after an error, at most 2 times. Nothing is sent anywhere."
+        },
+        "zovoRest.showSupportLinks": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the small Rate, More free tools and Zovo Pro links at the bottom of the response viewer. Nothing is sent anywhere."
+        }
+      }
+    },
+    "walkthroughs": [
+      {
+        "id": "zovoRest.start",
+        "title": "Get started with REST Client",
+        "description": "Send HTTP requests from .http files and read the response beside them.",
+        "steps": [
+          {
+            "id": "send",
+            "title": "Send your first request",
+            "description": "Open the sample file and click Send Request above a request, or press Ctrl+Alt+R (Cmd+Alt+R on macOS) with the cursor in it.\n[Open the sample requests](command:zovoRest.openSample)",
+            "media": {
+              "image": "images/screenshot.png",
+              "altText": "A .http file with Send Request links and a JSON response shown as a tree beside it."
+            },
+            "completionEvents": [
+              "onCommand:zovoRest.openSample",
+              "onCommand:zovoRest.send"
+            ]
+          },
+          {
+            "id": "env",
+            "title": "Use environments",
+            "description": "Write {{baseUrl}} and {{token}} in requests and keep their values per environment in http-client.env.json or in settings. Switch with Ctrl+Alt+E.\n[Switch environment](command:zovoRest.switchEnvironment)",
+            "media": {
+              "markdown": "walkthrough/env.md"
+            },
+            "completionEvents": [
+              "onCommand:zovoRest.switchEnvironment"
+            ]
+          },
+          {
+            "id": "curl",
+            "title": "Paste a cURL command",
+            "description": "Copy a cURL command from browser DevTools or API docs and paste it as a request.\n[Paste cURL as request](command:zovoRest.pasteCurl)",
+            "media": {
+              "markdown": "walkthrough/curl.md"
+            },
+            "completionEvents": [
+              "onCommand:zovoRest.pasteCurl"
+            ]
+          },
+          {
+            "id": "zovo-related",
+            "title": "Files that go with this one",
+            "description": "If your project also has PDF files or spreadsheets and CSV files, these free Zovo extensions open them. A link opens the extension page, and you choose there whether to install it.\n[PDF Viewer](command:extension.open?%5B%22zovo.pdf-viewer-dark%22%5D)\n[XLSX and CSV Viewer](command:extension.open?%5B%22zovo.table-viewer-vscode%22%5D)",
+            "media": {
+              "markdown": "walkthrough/related.md"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "scripts": {
+    "test": "node test/run.js"
+  },
+  "sponsor": {
+    "url": "https://github.com/sponsors/theluckystrike/sponsorships?tier_id=679878"
+  }
+}

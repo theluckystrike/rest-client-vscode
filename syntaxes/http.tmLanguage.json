@@ -1,0 +1,46 @@
+{
+  "name": "HTTP request file",
+  "scopeName": "source.http.zovo",
+  "patterns": [
+    { "include": "#separator" },
+    { "include": "#meta" },
+    { "include": "#comment" },
+    { "include": "#filevar" },
+    { "include": "#requestline" },
+    { "include": "#header" },
+    { "include": "#bodyfile" },
+    { "include": "#json" },
+    { "include": "#variable" }
+  ],
+  "repository": {
+    "separator": { "match": "^\\s*###.*$", "name": "markup.heading.http" },
+    "meta": {
+      "match": "^\\s*(#|//)\\s*(@[A-Za-z][\\w-]*)(.*)$",
+      "captures": { "1": { "name": "comment.line.http" }, "2": { "name": "keyword.other.directive.http" }, "3": { "patterns": [ { "include": "#variable" } ], "name": "string.unquoted.http" } }
+    },
+    "comment": { "match": "^\\s*(#|//).*$", "name": "comment.line.http" },
+    "filevar": {
+      "match": "^\\s*(@)([A-Za-z_][\\w.-]*)\\s*(=)\\s*(.*)$",
+      "captures": { "1": { "name": "punctuation.definition.variable.http" }, "2": { "name": "variable.other.http" }, "3": { "name": "keyword.operator.assignment.http" }, "4": { "patterns": [ { "include": "#variable" } ], "name": "string.unquoted.http" } }
+    },
+    "requestline": {
+      "match": "(?i)^\\s*(GET|POST|PUT|PATCH|DELETE|HEAD|OPTIONS|TRACE|CONNECT|PROPFIND|PROPPATCH|MKCOL|COPY|MOVE|LOCK|UNLOCK|QUERY)\\s+(\\S.*?)(\\s+HTTP/[0-9.]+)?\\s*$",
+      "captures": { "1": { "name": "keyword.control.http" }, "2": { "name": "string.unquoted.uri.http", "patterns": [ { "include": "#variable" } ] }, "3": { "name": "constant.language.http" } }
+    },
+    "header": {
+      "match": "^([A-Za-z0-9!#$%&'*+.^_`|~-]+)(:)\\s?(.*)$",
+      "captures": { "1": { "name": "entity.name.tag.http" }, "2": { "name": "punctuation.separator.key-value.http" }, "3": { "name": "string.unquoted.header.http", "patterns": [ { "include": "#variable" } ] } }
+    },
+    "bodyfile": { "match": "^\\s*(<@?)\\s+(.+)$", "captures": { "1": { "name": "keyword.operator.http" }, "2": { "name": "string.unquoted.path.http" } } },
+    "json": {
+      "begin": "^\\s*(?=[\\[{])",
+      "end": "^(?=\\s*###)",
+      "contentName": "meta.embedded.block.json",
+      "patterns": [ { "include": "#variable" }, { "include": "source.json" } ]
+    },
+    "variable": {
+      "match": "(\\{\\{)\\s*([^{}]+?)\\s*(\\}\\})",
+      "captures": { "1": { "name": "punctuation.definition.template-expression.begin.http" }, "2": { "name": "variable.other.readwrite.http" }, "3": { "name": "punctuation.definition.template-expression.end.http" } }
+    }
+  }
+}

@@ -1,0 +1,45 @@
+# Sample requests. Click "Send Request" above a request, or put the cursor in it and press
+# Ctrl+Alt+R (Cmd+Alt+R on macOS). The response opens beside this file.
+# These go to the public test services httpbin.org and jsonplaceholder.typicode.com.
+
+@api = https://jsonplaceholder.typicode.com
+@echo = https://httpbin.org
+
+### List posts of one user
+# @name posts
+GET {{api}}/posts?userId=1
+Accept: application/json
+
+### Read the first post from the list above (chained request)
+GET {{api}}/posts/{{posts.response.body.$[0].id}}
+
+### Create a post with a JSON body
+POST {{api}}/posts
+Content-Type: application/json
+
+{
+  "title": "Sent from VS Code",
+  "body": "Request id {{$guid}} at {{$datetime iso8601}}",
+  "userId": 1
+}
+
+### Form post with Basic auth (user and password are encoded for you)
+POST {{echo}}/post
+Authorization: Basic demo s3cret
+Content-Type: application/x-www-form-urlencoded
+
+name=Ada
+&role=admin
+
+### GraphQL query
+POST https://countries.trevorblades.com/
+X-Request-Type: GraphQL
+
+query Country($code: ID!) {
+  country(code: $code) { name capital currency }
+}
+
+{ "code": "SE" }
+
+### An image response is shown as an image
+GET {{echo}}/image/png

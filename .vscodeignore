@@ -1,0 +1,12 @@
+test/**
+scripts/**
+.github/**
+icon.svg
+node_modules/**
+dist/**
+*.vsix
+.gitignore
+.vscodeignore
+**/*.bak*
+vendor/yaml/dist/**/*.d.ts
+vendor/yaml/dist/**/*.map
